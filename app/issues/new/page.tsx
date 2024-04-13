@@ -1,18 +1,18 @@
-"use client";
+import dynamic from "next/dynamic";
+import IssueFormSkeleton from "./loading";
 
-import { Button, TextArea, TextField } from "@radix-ui/themes";
-import React from "react";
+const IssueForm = dynamic(
+  () => import('@/app/issues/_components/IssueForm'),
+  { 
+    ssr: false,
+    loading: () => <IssueFormSkeleton />
+  }
+);
 
 const NewIssuePage = () => {
   return (
-    <div className="max-w-xl space-y-3">
-      <TextField.Root>
-        <TextField.Input placeholder="Title" />
-      </TextField.Root>
-      <TextArea placeholder="Description" />
-      <Button>Submit new issue</Button>
-    </div>
-  );
-};
+    <IssueForm />
+  )
+}
 
-export default NewIssuePage;
+export default NewIssuePage
